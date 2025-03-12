@@ -1,0 +1,274 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customers {
+  id              Int       @id @default(autoincrement())
+  fullname        String
+  email           String    @unique
+  phone           String    @unique
+  hashed_password String
+  hashed_token    String?   @db.VarChar(500)
+  activation_link String?   @unique @db.VarChar(500)
+  is_active       Boolean   @default(false)
+  reviews         Reviews[]
+  orders          Orders[]
+
+  @@map("customers")
+}
+
+model Admin {
+  id              Int         @id @default(autoincrement())
+  name            String
+  email           String      @unique
+  phone           String      @unique
+  hashed_password String
+  hashed_token    String?     @db.VarChar(500)
+  is_creator      Boolean?    @default(false)
+  contracts       Contracts[]
+
+  @@map("admin")
+}
+
+model Country {
+  id               Int          @id @default(autoincrement())
+  name             String
+  is_visa_required Boolean      @default(false)
+  city             City[]
+  visa_policy      VisaPolicy[]
+
+  @@map("country")
+}
+
+model City {
+  id                Int               @id @default(autoincrement())
+  name              String
+  Country           Country?          @relation(fields: [countryId], references: [id])
+  countryId         Int
+  tour_package      TourPackage[]
+  hotels            Hotels[]
+  tour_package_city TourPackageCity[]
+
+  @@map("city")
+}
+
+model VisaPolicy {
+  id                   Int      @id @default(autoincrement())
+  visa_proceccing_time Int
+  duration_month       Int
+  Country              Country? @relation(fields: [countryId], references: [id])
+  countryId            Int
+
+  @@map("visa_policy")
+}
+
+model Insurance {
+  id              Int           @id @default(autoincrement())
+  company_name    String
+  valid_from      DateTime?
+  valid_to        DateTime?
+  price           Int
+  insurance_roles String
+  tour_package    TourPackage[]
+
+  @@map("insurance")
+}
+
+model Discounts {
+  id             Int           @id @default(autoincrement())
+  discount_value Int
+  valid_from     DateTime
+  valid_to       DateTime
+  description    String
+  tour_package   TourPackage[]
+
+  @@map("discounts")
+}
+
+model AviaTickets {
+  id                Int           @id @default(autoincrement())
+  aviacompany_name  String
+  departure_airport String
+  arrival_airport   String
+  departure_time    DateTime
+  arrival_time      DateTime
+  baggage           Int
+  ticket_class      String
+  price             Int
+  extra_services    String
+  tour_package      TourPackage[]
+
+  @@map("avia_tickets")
+}
+
+model TourPackage {
+  id                Int               @id @default(autoincrement())
+  title             String
+  description       String
+  price             Int?
+  duration          Int
+  valid_from        DateTime
+  valid_to          DateTime
+  available_seats   Int
+  is_active         Boolean
+  image             String?
+  createdAt         DateTime?         @default(now())
+  visa_required     Boolean?          @default(false)
+  City              City?             @relation(fields: [cityId], references: [id])
+  cityId            Int
+  orders            Orders[]
+  reviews           Reviews[]
+  tour_package_city TourPackageCity[]
+  Insurance         Insurance?        @relation(fields: [insuranceId], references: [id])
+  insuranceId       Int
+  AviaTickets       AviaTickets?      @relation(fields: [aviaTicketsId], references: [id])
+  aviaTicketsId     Int
+  Hotels            Hotels?           @relation(fields: [hotelsId], references: [id])
+  hotelsId          Int
+  Discounts         Discounts?        @relation(fields: [discountsId], references: [id])
+  discountsId       Int?
+
+  @@map("tour_package")
+}
+
+model TourPackageCity {
+  id            Int          @id @default(autoincrement())
+  City          City?        @relation(fields: [cityId], references: [id])
+  cityId        Int
+  TourPackage   TourPackage? @relation(fields: [tourPackageId], references: [id])
+  tourPackageId Int
+
+  @@map("tour_package_city")
+}
+
+model Hotels {
+  id                Int           @id @default(autoincrement())
+  name              String
+  stars_level       Int
+  price_per_night   Int
+  address           String
+  checkin_time      String
+  checkout_time     String
+  includes_services String
+  City              City?         @relation(fields: [cityId], references: [id])
+  cityId            Int
+  tour_package      TourPackage[]
+  images            Images[]
+
+  @@map("hotels")
+}
+
+model Reviews {
+  id            Int          @id @default(autoincrement())
+  comment       String
+  Customers     Customers?   @relation(fields: [customersId], references: [id])
+  customersId   Int
+  TourPackage   TourPackage? @relation(fields: [tourPackageId], references: [id])
+  tourPackageId Int
+
+  @@map("reviews")
+}
+
+model Images {
+  id        Int     @id @default(autoincrement())
+  image_url String
+  is_main   Boolean @default(false)
+  Hotels    Hotels? @relation(fields: [hotelsId], references: [id])
+  hotelsId  Int
+
+  @@map("images")
+}
+
+model Contracts {
+  id               Int        @id @default(autoincrement())
+  terms            String
+  start_date       DateTime?
+  end_date         DateTime?
+  payment_deadline DateTime?
+  paid_payment     Int?       @default(0)
+  payment_status   String
+  adminId          Int
+  ordersId         Int
+  createdAt        DateTime?  @default(now())
+  Admin            Admin?     @relation(fields: [adminId], references: [id])
+  Orders           Orders?    @relation(fields: [ordersId], references: [id])
+  payment          Payments[]
+
+  @@map("contracts")
+}
+
+model Orders {
+  id               Int              @id @default(autoincrement())
+  customersId      Int
+  tourPackageId    Int
+  status           Boolean?         @default(false)
+  createdAt        DateTime?        @default(now())
+  Customers        Customers?       @relation(fields: [customersId], references: [id])
+  TourPackage      TourPackage?     @relation(fields: [tourPackageId], references: [id])
+  travelers_orders TravelersOrder[]
+  travelers        Travelers[]
+  contracts        Contracts[]
+
+  @@map("orders")
+}
+
+model Payments {
+  id             Int        @id @default(autoincrement())
+  payment_date   DateTime?  @default(now())
+  amount         Int
+  payment_method String
+  Contracts      Contracts? @relation(fields: [contractsId], references: [id])
+  contractsId    Int
+
+  @@map("payments")
+}
+
+model Travelers {
+  id                 Int                @id @default(autoincrement())
+  fullname           String
+  phone              String             @unique
+  email              String             @unique
+  age                Int
+  gender             String
+  passport_info      String
+  birth_date         DateTime
+  is_exist_visa      Boolean
+  createdAt          DateTime?          @default(now())
+  travelers_orders   TravelersOrder[]
+  traveler_visa_info TravelerVisaInfo[]
+  Orders             Orders?            @relation(fields: [ordersId], references: [id])
+  ordersId           Int
+
+  @@map("travelers")
+}
+
+model TravelersOrder {
+  id          Int        @id @default(autoincrement())
+  Orders      Orders?    @relation(fields: [ordersId], references: [id])
+  ordersId    Int
+  Travelers   Travelers? @relation(fields: [travelersId], references: [id])
+  travelersId Int
+
+  @@map("travelers_order")
+}
+
+model TravelerVisaInfo {
+  id          Int        @id @default(autoincrement())
+  visa_type   String
+  expiry_date DateTime
+  Travelers   Travelers? @relation(fields: [travelersId], references: [id])
+  travelersId Int
+
+  @@map("traveler_visa_info")
+}

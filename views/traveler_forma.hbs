@@ -1,0 +1,202 @@
+{{!-- HBS shabloni --}}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foydalanuvchi Ro'yxatdan O'tish</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url("/images/3.webp");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 700px;
+        }
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        .form-group div {
+            width: 45%;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #4282a7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        button:hover {
+            background: #19466b;
+        }
+        input{
+            width: 290px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sayohat qiluvchining ma'lumotlarini kiriting</h2>
+        <form id="traveler-form">
+            <div class="form-group">
+                <div>
+                    <label for="fullname">Ism va Familiya:</label>
+                    <input type="text" id="fullname2" name="fullname" placeholder="Ism va Familiya" required>
+                </div>
+                <div>
+                    <label for="phone">Telefon Raqam:</label>
+                    <input type="tel" id="phone2" name="phone" placeholder="+998 90 123 45 67" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email2" name="email" placeholder="karim12@gmail.com" required>
+                </div>
+                <div>
+                    <label for="age">Yosh:</label>
+                    <input type="number" id="age2" name="age" required min="1" max="100">
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    <label for="gender">Jins:</label>
+                    <select id="gender2" name="gender" required>
+                        <option value="Erkak">Erkak</option>
+                        <option value="Ayol">Ayol</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="passport_info">Pasport Ma'lumotlari:</label>
+                    <input type="text" id="passport_info2" name="passport_info" placeholder="AB2543971" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    <label for="birth_date">Tug'ilgan Sana:</label>
+                    <input type="date" id="birth_date2" name="birth_date" required>
+                </div>
+                {{#if tourPackage.visa_required}}
+                <div>
+                    <label for="is_exist_visa">Viza Mavjudmi?</label>
+                    <select id="is_exist_visa2" name="is_exist_visa" required>
+                        <option value="true">Mavjud</option>
+                        <option value="false">Mavjud emas</option>
+                    </select>
+                </div>
+                {{/if}}
+                <input type="hidden" id="order_id2" value="{{order.id}}">
+            </div>
+            <button type="submit">Tasdiqlash</button>
+        </form>
+    </div>
+    <script>
+        async function submitForm() {
+  try {
+    const form = document.getElementById("traveler-form");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault(); // Formani default jo'natilishini to'xtatish
+
+      try {
+        // Form maydonlaridan ma'lumotlarni olish
+        const fullname = document.getElementById("fullname2").value;
+        const phone = document.getElementById("phone2").value;
+        const email = document.getElementById("email2").value;
+        const gender = document.getElementById("gender2").value;
+        const birth_date = document.getElementById("birth_date2").value;
+        const age = document.getElementById("age2").value;
+        const passport_info = document.getElementById("passport_info2").value;
+        const ordersId = document.getElementById("order_id2").value;
+        const isExistVisaElement = document.getElementById("is_exist_visa2");
+        const is_exist_visa = isExistVisaElement ? isExistVisaElement.value === "true" : false;
+ 
+        console.log(is_exist_visa);
+
+
+        const response = await fetch("http://localhost:3000/travelers", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fullname,
+            phone,
+            email,
+            gender,
+            birth_date,
+            age,
+            passport_info,
+            is_exist_visa,
+            ordersId,
+          }),
+        });
+
+        const data = await response.json();
+        console.log(data)
+        if (response.ok) {
+          Swal.fire({
+            title: "",
+            text: data.message,
+            icon: "success",
+          }).then(() => {
+            window.location.href = data.redirectTo; // Yangi sahifaga yo'naltirish
+          });
+        } else {
+          throw new Error(
+            data.message || "Foydalanuvchi ro'yxatdan o'ta olmadi!"
+          );
+        }
+      } catch (error) {
+        Swal.fire({
+          title: "",
+          text: error.message || "Ma'lumotlarni yuborishda muammo yuz berdi!",
+          icon: "error",
+        });
+        console.error("Xatolik:", error);
+      }
+    });
+  } catch (error) {
+    console.error("Funksiyani ishga tushirishda xatolik:", error);
+  }
+}
+
+
+submitForm();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>

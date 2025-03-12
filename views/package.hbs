@@ -1,0 +1,398 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About TourPackage</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Montserrat:400,500,600,700%7CPoppins:400%7CTeko:300,400"
+    />
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+    
+      .tasdiqlash {
+         position: absolute;
+            top: 270px;
+            right: 80px; /* Tugmani ekranning o‘ng yuqori burchagida joylash */
+            background: linear-gradient(to right, #00aaff, #0055ff);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            outline: none;
+            text-decoration: none;
+      }
+
+      .tasdiqlash:hover {
+        background: linear-gradient(to right, #0099ee, #0044dd);
+        box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+
+    <header class="section page-header">
+      <!-- RD Navbar-->
+      <div class="rd-navbar-wrap">
+        <nav
+          class="rd-navbar rd-navbar-corporate"
+          data-layout="rd-navbar-fixed"
+          data-sm-layout="rd-navbar-fixed"
+          data-md-layout="rd-navbar-fixed"
+          data-md-device-layout="rd-navbar-fixed"
+          data-lg-layout="rd-navbar-static"
+          data-lg-device-layout="rd-navbar-fixed"
+          data-xl-layout="rd-navbar-static"
+          data-xl-device-layout="rd-navbar-static"
+          data-xxl-layout="rd-navbar-static"
+          data-xxl-device-layout="rd-navbar-static"
+          data-lg-stick-up-offset="46px"
+          data-xl-stick-up-offset="46px"
+          data-xxl-stick-up-offset="106px"
+          data-lg-stick-up="true"
+          data-xl-stick-up="true"
+          data-xxl-stick-up="true"
+        >
+          <div
+            class="rd-navbar-collapse-toggle rd-navbar-fixed-element-1"
+            data-rd-navbar-toggle=".rd-navbar-collapse"
+          ><span></span></div>
+          
+          <div class="rd-navbar-main-outer">
+            <div class="rd-navbar-main">
+              <div class="rd-navbar-nav-wrap">
+                <ul
+                  class="list-inline list-inline-md rd-navbar-corporate-list-social"
+                >
+                  <li><a class="icon fa fa-facebook" href="#"></a></li>
+                  <li><a class="icon fa fa-twitter" href="#"></a></li>
+                  <li><a class="icon fa fa-google-plus" href="#"></a></li>
+                  <li><a class="icon fa fa-instagram" href="#"></a></li>
+                </ul>
+                <!-- RD Navbar Nav-->
+                <ul class="rd-navbar-nav">
+                  <li class="rd-nav-item"><a
+                      class="rd-nav-link"
+                      href="index.html"
+                    >Home</a>
+                  </li>
+                  <li class="rd-nav-item"><a
+                      class="rd-nav-link"
+                      href="about.html"
+                    >About</a>
+                  </li>
+                  <li class="rd-nav-item active"><a
+                      class="rd-nav-link"
+                      href="typography.html"
+                    >Typography</a>
+                  </li>
+                  <li class="rd-nav-item"><a
+                      class="rd-nav-link"
+                      href="contact-us.html"
+                    >Contact Us</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <section class="section section-sm bg-default">
+      <div class="container">
+        <h3 class="oh-desktop"><span
+            class="d-inline-block wow slideInDown"
+          >Turpaket Mehmonxona, Aviabilet va Sug'urta xizmatlarini o'z ichiga
+            oladi</span></h3>
+        <div class="row row-sm row-40 row-md-50">
+          <h3>Mehmonxona</h3>
+          <div class="col-sm-6 col-md-12 wow fadeInRight">
+            <!-- Product Big-->
+            <article class="product-big">
+              <div class="unit flex-column flex-md-row align-items-md-stretch">
+                <div class="unit-left"><a
+                    class="product-big-figure"
+                    href="#"
+                  ><img
+                      src="/images/{{image.image_url}}"
+                      alt="image"
+                      width="600"
+                      height="366"
+                    /></a></div>
+                <div class="unit-body">
+                  <div class="product-big-body">
+                    <h5 class="product-big-title"><h5
+                      >{{tourPackage.Hotels.name}}</h5></h5>
+                    <div class="group-sm group-middle justify-content-start">
+                      <div class="product-big-rating"><span
+                          class="icon material-icons-star"
+                        ></span><span
+                          class="icon material-icons-star"
+                        ></span><span
+                          class="icon material-icons-star"
+                        ></span><span
+                          class="icon material-icons-star"
+                        ></span><span
+                          class="icon material-icons-star"
+                        ></span></div>
+                    </div>
+                    <p class="product-big-text"><h6
+                      >Manzil</h6>{{tourPackage.Hotels.address}}</p>
+                    <p class="product-big-text"><h6>Registratsiya vaqti kunduzgi</h6>{{tourPackage.Hotels.checkin_time}}</p>
+                    <p class="product-big-text"><h6>Chiqib ketish vaqti kunduzgi</h6>{{tourPackage.Hotels.checkout_time}}</p>
+                    <p class="product-big-text"><h6
+                      >Xizmatlari</h6>{{tourPackage.Hotels.includes_services}}</p>
+                    {{! <a href="#" class="button">Buy TourPackage</a> }}
+
+                    <div class="product-big-price-wrap"><span
+                        class="product-big-price"
+                      ><p
+                        >Kuniga</p>${{tourPackage.Hotels.price_per_night}}</span></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section section-sm bg-default">
+      <div class="container">
+        <div class="row row-sm row-40 row-md-50">
+          <h3>Aviabilet</h3>
+          <div class="col-sm-6 col-md-12 wow fadeInRight">
+            <!-- Product Big-->
+            <article class="product-big">
+              <div class="unit flex-column flex-md-row align-items-md-stretch">
+                <div class="unit-left"><a
+                    class="product-big-figure"
+                    href="#"
+                  ><img
+                      src="/images/d.jpg"
+                      alt="image"
+                      width="600"
+                      height="366"
+                    /></a></div>
+                <div class="unit-body">
+                  <div class="product-big-body">
+                    <h5 class="product-big-title"><h5
+                      >{{tourPackage.AviaTickets.aviacompany_name}}</h5></h5>
+                    <div class="group-sm group-middle justify-content-start">
+                      <div class="product-big-rating"><span
+                          class="icon material-icons-star"
+                        ></span><span
+                          class="icon material-icons-star"
+                        ></span><span
+                          class="icon material-icons-star"
+                        ></span><span
+                          class="icon material-icons-star"
+                        ></span><span
+                          class="icon material-icons-star"
+                        ></span></div>
+                    </div>
+                    <p class="product-big-text"><h6>Uchish aeroporti</h6>{{tourPackage.AviaTickets.departure_airport}}</p>
+                    <p class="product-big-text"><h6>Qo'nish aeroporti</h6>{{tourPackage.AviaTickets.arrival_airport}}</p>
+                    <p class="product-big-text"><h6>Uchish vaqti</h6>{{tourPackage.AviaTickets.departure_time}}</p>
+                    <p class="product-big-text"><h6>Qo'nish vaqti</h6>{{tourPackage.AviaTickets.arrival_time}}</p>
+                    <p class="product-big-text"><h6>Bagaj hajmi</h6>{{tourPackage.AviaTickets.baggage}}</p>
+                    <p class="product-big-text"><h6>Bilet turi</h6>{{tourPackage.AviaTickets.ticket_class}}</p>
+                    <p class="product-big-text"><h6>Ichki xizmatlari</h6>{{tourPackage.AviaTickets.extra_services}}</p>
+                    <div class="product-big-price-wrap"><span
+                        class="product-big-price"
+                      ><p></p>${{tourPackage.AviaTickets.price}}</span></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-sm bg-default">
+      <div class="container">
+        <div class="row row-sm row-40 row-md-50">
+          <h3>Sug'urta</h3>
+          <div class="col-sm-6 col-md-12 wow fadeInRight">
+            <!-- Product Big-->
+            <article class="product-big">
+              <div class="unit flex-column flex-md-row align-items-md-stretch">
+                <div class="unit-left"><a
+                    class="product-big-figure"
+                    href="#"
+                  ><img
+                      src="/images/sugurta.jpg"
+                      alt="image"
+                      width="600"
+                      height="366"
+                    /></a></div>
+                <div class="unit-body">
+                  <div class="product-big-body">
+                    <h5 class="product-big-title"><h5
+                      >{{tourPackage.Insurance.company_name}}</h5></h5>
+                    <div class="group-sm group-middle justify-content-start">
+                      <div class="product-big-rating"><span
+                          class="icon material-icons-star"
+                        ></span><span
+                          class="icon material-icons-star"
+                        ></span><span
+                          class="icon material-icons-star"
+                        ></span><span
+                          class="icon material-icons-star"
+                        ></span><span
+                          class="icon material-icons-star"
+                        ></span></div>
+                    </div>
+                    <p class="product-big-text"><h6>Sug'urta qoidalari</h6>{{tourPackage.Insurance.insurance_roles}}</p>
+                    <div class="product-big-price-wrap"><span
+                        class="product-big-price"
+                      ><p></p>${{tourPackage.Insurance.price}}</span></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+    <a href="/api/travelerform/{{tourPackage.id}}" class="tasdiqlash">Rasmiylashtirish</a>
+    <footer class="section footer-corporate context-dark">
+      <div class="footer-corporate-inset">
+        <div class="container">
+          <div class="row row-40 justify-content-lg-between">
+            <div class="col-sm-6 col-md-12 col-lg-3 col-xl-4">
+              <div class="oh-desktop">
+                <div class="wow slideInRight" data-wow-delay="0s">
+                  <h6 class="text-spacing-100 text-uppercase">Contact us</h6>
+                  <ul class="footer-contacts d-inline-block d-sm-block">
+                    <li>
+                      <div class="unit">
+                        <div class="unit-left"><span
+                            class="icon fa fa-phone"
+                          ></span></div>
+                        <div class="unit-body"><a
+                            class="link-phone"
+                            href="tel:#"
+                          >+1 323-913-4688</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="unit">
+                        <div class="unit-left"><span
+                            class="icon fa fa-envelope"
+                          ></span></div>
+                        <div class="unit-body"><a
+                            class="link-aemail"
+                            href="mailto:#"
+                          >info@demolink.org</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="unit">
+                        <div class="unit-left"><span
+                            class="icon fa fa-location-arrow"
+                          ></span></div>
+                        <div class="unit-body"><a
+                            class="link-location"
+                            href="#"
+                          >4730 Crystal Springs Dr, Los Angeles, CA 90027</a></div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-5 col-lg-3 col-xl-4">
+              <div class="oh-desktop">
+                <div class="wow slideInDown" data-wow-delay="0s">
+                  <h6 class="text-spacing-100 text-uppercase">Popular news</h6>
+                  <!-- Post Minimal 2-->
+                  <article class="post post-minimal-2">
+                    <p class="post-minimal-2-title"><a href="#">Your Personal
+                        Guide to 5 Best Places to Visit on Earth</a></p>
+                    <div class="post-minimal-2-time">
+                      <time datetime="2019-05-04">May 04, 2019</time>
+                    </div>
+                  </article>
+                  <!-- Post Minimal 2-->
+                  <article class="post post-minimal-2">
+                    <p class="post-minimal-2-title"><a href="#">Top 10 Hotels:
+                        Rating by Wonder Tour Travel Experts</a></p>
+                    <div class="post-minimal-2-time">
+                      <time datetime="2019-05-04">May 04, 2019</time>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-11 col-md-7 col-lg-5 col-xl-4">
+              <div class="oh-desktop">
+                <div class="wow slideInLeft" data-wow-delay="0s">
+                  <h6 class="text-spacing-100 text-uppercase">Quick links</h6>
+                  <ul
+                    class="row-6 list-0 list-marked list-marked-md list-marked-secondary list-custom-2"
+                  >
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="#">Our Tours</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Blog</a></li>
+                  </ul>
+                  <div class="group-md group-middle justify-content-sm-start"><a
+                      class="button button-lg button-primary button-ujarak"
+                      href="#"
+                    >Get in touch</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-corporate-bottom-panel">
+        <div class="container">
+          <div
+            class="row justfy-content-xl-space-berween row-10 align-items-md-center2"
+          >
+            <div class="col-sm-6 col-md-4 text-sm-right text-md-center">
+              <div>
+                <ul class="list-inline list-inline-sm footer-social-list-2">
+                  <li><a class="icon fa fa-facebook" href="#"></a></li>
+                  <li><a class="icon fa fa-twitter" href="#"></a></li>
+                  <li><a class="icon fa fa-google-plus" href="#"></a></li>
+                  <li><a class="icon fa fa-instagram" href="#"></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4 order-sm-first">
+              <!-- Rights-->
+              <p class="rights"><span>&copy;&nbsp;</span><span
+                  class="copyright-year"
+                ></span><span>&nbsp;</span><span>Wonder Tour</span>. All Rights
+                Reserved. Design by
+                <a
+                  href="https://www.templatemonster.com"
+                >TemplateMonster</a></p>
+            </div>
+            <div class="col-sm-6 col-md-4 text-md-right">
+              <p class="rights"><a href="#">Privacy Policy</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Javascript-->
+    <script src="/js/core.min.js"></script>
+    <script src="/js/script.js"></script>
+  </body>
+</html>

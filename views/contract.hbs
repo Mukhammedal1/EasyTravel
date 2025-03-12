@@ -1,0 +1,222 @@
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contract Ma'lumotlari</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        padding: 20px;
+        background-color: #c4c4c4;        
+      }
+      .contract-container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      .card-title {
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      .stamp-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        margin-bottom: 15px;
+      }
+      .stamp {
+        width: 150px; /* Rasmning o'lchamini kamaytirish */
+        height: 150px;
+        border-radius: 50%; /* Dumaloq qilish */
+        overflow: hidden;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        border: 2px solid #000;
+      }
+      .stamp img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Rasmni to'g'ri joylashtirish */
+      }
+      .download-btn {
+        display: block;
+        margin: 20px auto;
+      }
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="contract-container" id="contract">
+      <div class="stamp-container">
+        <div class="stamp">
+          <img src="/images/pechat.webp" alt="" />
+        </div>
+      </div>
+      <h2 class="text-center">Kontrakt Ma'lumotlari</h2>
+      <div class="card my-3">
+        <div class="card-body">
+          <div class="card-title">Kontrakt Raqami: {{contract.id}}</div>
+          <div class="card-title"><center>Admin ma'lumotlari</center></div>
+          <p><b>Ism</b>: {{contract.Admin.name}}</p>
+          <p><b>Email:</b> {{contract.Admin.email}}</p>
+          <p><b>Telefon raqam:</b> {{contract.Admin.phone}}</p>
+
+          <div class="card-title"><center>Sayohatchi ma'lumotlari</center></div>
+          {{#each contract.Orders.travelers}}
+            {{!-- {{#each this.travelers}} --}}
+            <div>
+              <p><b>Ism va Familiya: </b> {{this.fullname}}</p>
+              <p><b>Telefon raqam: </b> {{this.phone}}</p>
+              <p><b>Email: </b> {{this.email}}</p>
+              <p><b>Yoshi:</b> {{this.age}}</p>
+              <p><b>Jinsi:</b> {{this.gender}}</p>
+              <p><b>Passport seriya raqami: </b> {{this.passport_info}}</p>
+              <p><b>Tug'ilgan sanasi: </b> {{this.birth_date}}</p>
+            </div>
+            {{!-- {{/each}} --}}
+          {{/each}}
+
+          <div class="card-title"><center>Turpaket haqida malumot</center></div>
+          <p><b>Shahar:</b> {{contract.Orders.TourPackage.City.name}}</p>
+          <p><b>Turpaket haqida:</b>
+            {{contract.Orders.TourPackage.description}}</p>
+          <p><b>Narxi:</b> ${{contract.Orders.TourPackage.price}}</p>
+          <p><b>Davomiyligi:</b>
+            {{contract.Orders.TourPackage.duration}}
+            kun</p>
+
+          <div class="card-title"><center>Aviabilet haqida malumot</center></div>
+          <p><b>AviaKompaniya:</b>
+            {{contract.Orders.TourPackage.AviaTickets.aviacompany_name}}</p>
+          <p><b>Uchish Aeroporti:</b>
+            {{contract.Orders.TourPackage.AviaTickets.departure_airport}}</p>
+          <p><b>Qo'nish Aeroporti:</b>
+            {{contract.Orders.TourPackage.AviaTickets.arrival_airport}}</p>
+          <p><b>Uchish vaqti:</b>
+            {{contract.Orders.TourPackage.AviaTickets.departure_time}}</p>
+          <p><b>Qo'nish vaqti:</b>
+            {{contract.Orders.TourPackage.AviaTickets.arrival_time}}</p>
+          <p><b>Bagaj hajmi:</b>
+            {{contract.Orders.TourPackage.AviaTickets.baggage}}
+            kg</p>
+          <p><b>Bilet turi:</b>
+            {{contract.Orders.TourPackage.AviaTickets.ticket_class}}</p>
+          <p><b>Narxi:</b>
+            ${{contract.Orders.TourPackage.AviaTickets.price}}</p>
+          <p><b>Qo'shimcha xizmatlari:</b>
+            {{contract.Orders.TourPackage.AviaTickets.extra_services}}</p>
+
+          <div class="card-title"><center>Mehmonxona haqida malumot</center></div>
+          <p><b>Nomi:</b> {{contract.Orders.TourPackage.Hotels.name}}</p>
+          <p><b>Darajasi:</b>
+            {{contract.Orders.TourPackage.Hotels.stars_level}}
+            yulduzli</p>
+          <p><b>Bir kecha uchun narx:</b>
+            ${{contract.Orders.TourPackage.Hotels.price_per_night}}</p>
+          <p><b>Manzil:</b> {{contract.Orders.TourPackage.Hotels.address}}</p>
+          <p><b>Joylashish vaqti: </b>kunduzgi
+            {{contract.Orders.TourPackage.Hotels.checkin_time}}</p>
+          <p><b>Chiqib ketish vaqti: </b>kunduzgi
+            {{contract.Orders.TourPackage.Hotels.checkout_time}}</p>
+          <p><b>Qo'shimcha xizmatlari:</b>
+            {{contract.Orders.TourPackage.Hotels.includes_services}}</p>
+
+          <div class="card-title"><center>Sug'urta haqida malumot</center></div>
+          <p><b>Sug'urta kompaniyasi:</b>
+            {{contract.Orders.TourPackage.Insurance.company_name}}</p>
+          <p><b>Amal qilishni boshlash muddati:</b>
+            {{contract.Orders.TourPackage.Insurance.valid_from}}</p>
+          <p><b>Amal qilishi tugash muddati:</b>
+            {{contract.Orders.TourPackage.Insurance.valid_to}}</p>
+          <p><b>Narxi:</b> {{contract.Orders.TourPackage.Insurance.price}}</p>
+          <p><b>Sharti:</b>
+            {{contract.Orders.TourPackage.Insurance.insurance_roles}}</p>
+
+        </div>
+        <button id="downloadBtn"
+          class="btn btn-primary download-btn"
+          onclick="generatePDF()"
+        >
+          <i class="bi bi-download"></i>
+          Contractni Yuklab Olish
+        </button>
+      </div>
+    </div>
+    <script>
+       async function generatePDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+    });
+
+    const element = document.getElementById("contract");
+
+    // HTML ni canvas ga aylantirish
+    const canvas = await html2canvas(element, { scale: 1.5 });
+
+    // Canvasdan rasm olish
+    let imgData = canvas.toDataURL("image/png");
+
+    // PDF sahifa o‘lchamlari
+    let imgWidth = 180; // A4 eni (mm) - 20 mm chegara
+    const pageHeight = 297; // A4 uzunligi (mm)
+    let imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    let yPos = 10; // Boshlang‘ich y koordinatasi
+
+    // **❗Xato kod shu yerda edi: `const imgWidth` qayta tayinlanayotgan edi.**
+    while (imgHeight > pageHeight - 20) { 
+        imgHeight *= 0.9; 
+        imgWidth *= 0.9;  // `let` ishlatganimiz uchun xatolik yo‘q
+    }
+
+    // 1-sahifa
+    doc.addImage(imgData, "PNG", 10, yPos, imgWidth, imgHeight);
+
+    // Agar matn hali ham sig‘magan bo‘lsa, 2-sahifa qo‘shish
+    if (imgHeight > pageHeight - 20) {
+        doc.addPage();
+        doc.addImage(imgData, "PNG", 10, yPos, imgWidth, imgHeight);
+    }
+
+    doc.save("contract.pdf");
+}
+
+// Tugma bosilganda faqat bitta PDF yaratish
+document.getElementById("downloadBtn").addEventListener("click", () => {
+    if (!window.isGeneratingPDF) {
+        window.isGeneratingPDF = true;
+        generatePDF().then(() => {
+            window.isGeneratingPDF = false;
+        });
+    }
+});
+
+
+
+    </script>
+  </body>
+</html>
