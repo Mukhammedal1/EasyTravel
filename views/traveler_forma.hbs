@@ -175,10 +175,12 @@
             window.location.href = data.redirectTo; // Yangi sahifaga yo'naltirish
           });
         } else {
-          throw new Error(
-            data.message || "Foydalanuvchi ro'yxatdan o'ta olmadi!"
-          );
-        }
+        Swal.fire({
+          title: "",
+          text: data.message.response.message,
+          icon: "error",
+        });
+      }
       } catch (error) {
         Swal.fire({
           title: "",

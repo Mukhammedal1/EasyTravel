@@ -12,12 +12,15 @@ export class CountryService {
 
   findAll() {
     return this.prismaService.country.findMany({
-      include: { city: true, visa_policy: true },
+      include: { city: { include: { tour_package: true } }, visa_policy: true },
     });
   }
 
   findOne(id: number) {
-    return this.prismaService.country.findUnique({ where: { id } });
+    return this.prismaService.country.findUnique({
+      where: { id },
+      include: { city: { include: { tour_package: true } } },
+    });
   }
 
   update(id: number, updateCountryDto: UpdateCountryDto) {

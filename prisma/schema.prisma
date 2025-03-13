@@ -237,8 +237,8 @@ model Payments {
 model Travelers {
   id                 Int                @id @default(autoincrement())
   fullname           String
-  phone              String             @unique
-  email              String             @unique
+  phone              String             
+  email              String             
   age                Int
   gender             String
   passport_info      String

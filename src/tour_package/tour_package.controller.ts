@@ -17,6 +17,7 @@ import { SearchTourPackageByDateDto } from "./dto/search-tour-package.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { JwtAuthGuard } from "../guards/jwt_auth_guard";
 import { AdminGuard } from "../guards/isAdminGuard";
+import { SearchTourPackageByCityDto } from "./dto/searchTourPackageByCity.dto";
 
 @Controller("tour-package")
 export class TourPackageController {
@@ -42,6 +43,13 @@ export class TourPackageController {
     );
   }
 
+  @Post("searchcity")
+  findByCityName(
+    @Body() searchTourPackageByCityDto: SearchTourPackageByCityDto
+  ) {
+    return this.tourPackageService.findByCityName(searchTourPackageByCityDto);
+  }
+
   @UseGuards(JwtAuthGuard, AdminGuard)
   @UseInterceptors(FileInterceptor("image"))
   @Patch("image/:id")
@@ -52,6 +60,7 @@ export class TourPackageController {
     return this.tourPackageService.updateTourPackageImage(+id, image);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.tourPackageService.findOne(+id);
@@ -66,6 +75,7 @@ export class TourPackageController {
     return this.tourPackageService.update(+id, updateTourPackageDto);
   }
 
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Delete(":id")
   remove(@Param("id") id: string) {
     return this.tourPackageService.remove(+id);

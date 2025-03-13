@@ -3,6 +3,7 @@ import {
   ForbiddenException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
@@ -92,6 +93,9 @@ export class AuthAdminService {
   }
 
   async signOut(refreshToken: string, res: Response) {
+     if (!refreshToken) {
+       throw new NotFoundException("Refresh token not found");
+     }
     const adminData = await this.jwtService.verify(refreshToken, {
       secret: process.env.ADMIN_REFRESH_TOKEN_KEY,
     });
@@ -111,6 +115,9 @@ export class AuthAdminService {
   }
 
   async refreshToken(adminId: number, refreshToken: string, res: Response) {
+     if (!refreshToken) {
+       throw new NotFoundException("Refresh token not found");
+     }
     const decodedToken = await this.jwtService.decode(refreshToken);
     if (adminId !== decodedToken["id"]) {
       throw new BadRequestException("Ruxsat etilmagan foydalanuvchi");

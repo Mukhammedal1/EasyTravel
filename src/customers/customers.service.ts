@@ -22,11 +22,17 @@ export class CustomersService {
     const { password, email, ...data } = createCustomerDto;
     const hashed_password = await bcrypt.hash(password, 7);
     const activation_link = uuid.v4();
-    const customer = await this.prismaService.customers.findFirst({
+    const customer = await this.prismaService.customers.findUnique({
       where: { email },
     });
     if (customer) {
-      throw new BadRequestException("Bunday cusomer mavjud");
+      throw new BadRequestException("Bunday email egasi mavjud");
+    }
+    const customer2 = await this.prismaService.customers.findUnique({
+      where: { phone: data.phone },
+    });
+    if (customer2) {
+      throw new BadRequestException("Bunday telefon raqam egasi mavjud");
     }
 
     const newCustomer = await this.prismaService.customers.create({

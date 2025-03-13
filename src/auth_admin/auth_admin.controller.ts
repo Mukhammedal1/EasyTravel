@@ -5,16 +5,17 @@ import { AdminSignInDto, CreateAdminDto } from "../admin/dto";
 import { Response } from "express";
 import { CookieGetter } from "../decorators/cookie-getter.decorator";
 
+
 @Controller("auth-admin")
 export class AuthAdminController {
   constructor(private readonly authAdminService: AuthAdminService) {}
 
-  @ApiOperation({ summary: "Yangi Admin qo'shish" })
-  @ApiResponse({
-    status: 201,
-    description: "Yangi qo'shilgan Admin",
-    type: String,
-  })
+  // @ApiOperation({ summary: "Yangi Admin qo'shish" })
+  // @ApiResponse({
+  //   status: 201,
+  //   description: "Yangi qo'shilgan Admin",
+  //   type: String,
+  // })
 
   // @Post("signup")
   // async signUp(@Body() createAdminDto: CreateAdminDto) {

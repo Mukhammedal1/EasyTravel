@@ -3,8 +3,6 @@ function isTokenExpired(token) {
   return expTime && new Date() >= expTime;
 }
 
-
-
 async function login() {
   const login = document.getElementById("login");
   const form = document.getElementById("login-form");
@@ -30,19 +28,18 @@ async function login() {
       console.log(data.message);
       if (!response.ok) {
         Swal.fire({
-          title: "Error",
-          text: data.message || "Login failed. Please try again.",
+          title: "",
+          text:
+            data.message.response.message || "Login failed. Please try again.",
           icon: "error",
         });
         return;
       }
-      
+
       login.style.display = "none";
 
-    
-      
       Swal.fire({
-        title: "Success",
+        title: "",
         text: data.message,
         icon: "success",
       }).then(() => {
@@ -71,42 +68,46 @@ async function register() {
     const phone = document.getElementById("phone").value;
 
     try {
-      const response = await fetch("http://localhost:3000/auth-customer/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ fullname, email, password, phone })
-      });
-      let data = await  response.json()
-      console.log(response);
+      console.log(111111);
+      const response = await fetch(
+        "http://localhost:3000/auth-customer/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ fullname, email, password, phone }),
+        }
+      );
+      console.log(222222);
+      let data = await response.json();
+      console.log("data: ", data);
+
       if (response.ok) {
         Swal.fire({
-          title: "Created!",
-          text: data.message,
+          title: "",
+          text: data.message, // Muvaffaqiyatli xabarni chiqarish
           icon: "success",
         }).then(() => {
           window.location.href = "/api/register";
         });
       } else {
-       
         Swal.fire({
-          title: "Error",
-          text: data.message || "Failed to register customer. Please try again.",
+          title: "",
+          text: data.message.response.message,
           icon: "error",
         });
       }
     } catch (error) {
       Swal.fire({
         title: "Error",
-        text: "Failed to register customer. Please check your internet connection and try again.",
+        text: "Internetga ulanishda xatolik!",
         icon: "error",
       });
       console.error("Error during registration:", error);
     }
   });
 }
-
 
 async function refreshToken() {
   try {
@@ -118,8 +119,10 @@ async function refreshToken() {
 
     if (!response.ok) {
       console.log("Refresh token failed");
-      document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie =
+        "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie =
+        "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       window.location.href = "/login";
       return null;
     }
@@ -138,26 +141,31 @@ async function refreshToken() {
   }
 }
 
-
 async function logout() {
+  document.getElementById("logout-btn").addEventListener("click", logout);
   try {
-    const response = await fetch("http://localhost:2000/api/admin/logout", {
-      method: "POST",
-      credentials: "include", 
-    });
+    const response = await fetch(
+      "http://localhost:3000/auth-customer/signout",
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
+
+    const data = await response.json(); // Backend javobini olish
 
     if (response.ok) {
       Swal.fire({
-        title: "Logged Out",
-        text: "You have successfully logged out.",
+        title: "",
+        text: data.message,
         icon: "success",
       }).then(() => {
-        window.location.href = "/login";
+        window.location.href = "/api";
       });
     } else {
       Swal.fire({
-        title: "Error",
-        text: "Failed to log out. Please try again.",
+        title: "",
+        text: data.message || "Logout failed",
         icon: "error",
       });
     }
@@ -171,8 +179,7 @@ async function logout() {
   }
 }
 
-
 register();
 login();
-// logout()
+logout();
 // refreshToken()

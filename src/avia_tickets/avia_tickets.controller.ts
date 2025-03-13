@@ -13,7 +13,9 @@ import { CreateAviaTicketDto } from "./dto/create-avia_ticket.dto";
 import { UpdateAviaTicketDto } from "./dto/update-avia_ticket.dto";
 import { JwtAuthGuard } from "../guards/jwt_auth_guard";
 import { AdminGuard } from "../guards/isAdminGuard";
+import { ApiBearerAuth } from "@nestjs/swagger";
 
+@ApiBearerAuth()
 @Controller("avia-tickets")
 export class AviaTicketsController {
   constructor(private readonly aviaTicketsService: AviaTicketsService) {}

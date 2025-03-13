@@ -14,7 +14,9 @@ import { UpdateAdminDto } from "./dto/update-admin.dto";
 import { AdminCreatorGuard } from "../guards/admin_creator_guard";
 import { JwtAuthGuard } from "../guards/jwt_auth_guard";
 import { AdminSelfGuard } from "../guards/admin_self_guard";
+import { ApiBearerAuth } from "@nestjs/swagger";
 
+@ApiBearerAuth()
 @Controller("admin")
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}

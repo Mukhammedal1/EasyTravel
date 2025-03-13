@@ -15,6 +15,7 @@ import { DiscountsService } from "../discounts/discounts.service";
 import { TourPackageCityService } from "../tour_package_city/tour_package_city.service";
 import { SearchTourPackageByDateDto } from "./dto/search-tour-package.dto";
 import { FileService } from "../file/file.service";
+import { SearchTourPackageByCityDto } from "./dto/searchTourPackageByCity.dto";
 
 @Injectable()
 export class TourPackageService {
@@ -137,6 +138,37 @@ export class TourPackageService {
     }
 
     return tour_packages;
+  }
+
+  async findByCityName(searchDto: SearchTourPackageByCityDto) {
+    const { city_name } = searchDto;
+
+    const city = await this.prismaService.city.findFirst({
+      where: { name: { contains: city_name, mode: "insensitive" } },
+    });
+
+    if (!city) {
+      throw new NotFoundException(
+        `${city_name} bo'yicha turpaketlar topilmadi.`
+      );
+    }
+
+    const tourPackages = await this.prismaService.tourPackage.findMany({
+      where: { cityId: city.id },
+      include: {
+        AviaTickets: true,
+        Hotels: true,
+        Insurance: true,
+      },
+    });
+
+    if (tourPackages.length === 0) {
+      throw new NotFoundException(
+        `${city_name} bo'yicha turpaketlar topilmadi.`
+      );
+    }
+
+    return tourPackages;
   }
 
   async updateTourPackageImage(id: number, image: any) {

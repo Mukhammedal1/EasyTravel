@@ -13,7 +13,9 @@ import { CreateCountryDto } from "./dto/create-country.dto";
 import { UpdateCountryDto } from "./dto/update-country.dto";
 import { JwtAuthGuard } from "../guards/jwt_auth_guard";
 import { AdminGuard } from "../guards/isAdminGuard";
+import { ApiBearerAuth } from "@nestjs/swagger";
 
+@ApiBearerAuth()
 @Controller("country")
 export class CountryController {
   constructor(private readonly countryService: CountryService) {}
@@ -24,13 +26,11 @@ export class CountryController {
     return this.countryService.create(createCountryDto);
   }
 
-  @UseGuards(JwtAuthGuard, AdminGuard)
   @Get()
   findAll() {
     return this.countryService.findAll();
   }
 
-  @UseGuards(JwtAuthGuard, AdminGuard)
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.countryService.findOne(+id);

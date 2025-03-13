@@ -28,18 +28,13 @@ export class TravelersService {
     const age2 = Number(age);
     const formatted_date = new Date(birth_date);
 
-    const existingTraveler = await this.prismaService.travelers.findFirst({
-      where: {
-        OR: [
-          { phone: data.phone }, // Agar passport_number noyob bo‘lsa
-          { email: data.email }, // Agar email noyob bo‘lsa
-        ],
-      },
-    });
+    // const existingTraveler = await this.prismaService.travelers.findUnique({
+    //   where: { email: data.email },
+    // });
 
-    if (existingTraveler) {
-      throw new BadRequestException("Bunday sayohatchi mavjud!");
-    }
+    // if (existingTraveler) {
+    //   throw new BadRequestException("Bunday email  mavjud!");
+    // }
 
     const order = await this.orderService.findOne(ordersId);
     if (!order) {

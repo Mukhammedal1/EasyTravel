@@ -46,6 +46,7 @@ export class AuthCustomerController {
     @CookieGetter("refresh_token") refreshToken: string,
     @Res({ passthrough: true }) res: Response
   ) {
+    console.log(refreshToken);
     return this.authCustomerService.refreshToken(+id, refreshToken, res);
   }
 }

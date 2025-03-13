@@ -58,7 +58,8 @@
                         <div class="unit-body"><a class="link-phone" href="tel:#">+998 90 123 45 67</a></div>
                       </div>
                     </li>
-                    <a style="margin-left: 15px;" href="/api/register" class="btn-signin">Sign In</a>
+                    <a style="margin-left: 15px;" href="/api/signin" class="btn-signin">Sign In</a>
+                    <a style="margin-left: 15px;" href="#" class="btn-signin" id="logout-btn">Sign Out</a>
                   {{!-- </ul><a class="button button-md button-default-outline-2 button-ujarak" href="#">Get a Free Quote</a> --}}
                 </div>
               </div>
@@ -577,6 +578,41 @@
     <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>
     <!-- Javascript-->
+    <script>
+  document.getElementById("logout-btn").addEventListener("click", async function () {
+    try {
+      const response = await fetch("http://localhost:3000/auth-customer/signout", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      const data = await response.json(); // Javobni JSON formatda olish
+
+      if (response.ok) {
+        Swal.fire({
+          title: "",
+          text: data.message,
+          icon: "success",
+        }).then(() => {
+          window.location.href = "/api";
+        });
+      } else {
+        Swal.fire({
+          title: "",
+          text: data.message || "Logout failed",
+          icon: "error",
+        });
+      }
+    } catch (error) {
+      console.error("Logout error:", error);
+      Swal.fire({
+        title: "Error",
+        text: "An error occurred while logging out. Please try again.",
+        icon: "error",
+      });
+    }
+  });
+</script>
     <script src="/js/core.min.js"></script>
     <script src="/js/script.js"></script>
   </body>

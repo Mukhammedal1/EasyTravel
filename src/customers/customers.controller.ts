@@ -15,7 +15,9 @@ import { JwtAuthGuard } from "../guards/jwt_auth_guard";
 import { CustomerSelfGuard } from "../guards/customer_self_guard";
 import { AdminSelfGuard } from "../guards/admin_self_guard";
 import { AdminGuard } from "../guards/isAdminGuard";
+import { ApiBearerAuth } from "@nestjs/swagger";
 
+@ApiBearerAuth()
 @Controller("customers")
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}

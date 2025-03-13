@@ -13,6 +13,9 @@ import { CreateDiscountDto } from "./dto/create-discount.dto";
 import { UpdateDiscountDto } from "./dto/update-discount.dto";
 import { JwtAuthGuard } from "../guards/jwt_auth_guard";
 import { AdminGuard } from "../guards/isAdminGuard";
+import { ApiBearerAuth } from "@nestjs/swagger";
+
+@ApiBearerAuth()
 
 @Controller("discounts")
 export class DiscountsController {
@@ -24,7 +27,6 @@ export class DiscountsController {
     return this.discountsService.create(createDiscountDto);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.discountsService.findAll();

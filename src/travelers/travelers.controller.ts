@@ -13,12 +13,14 @@ import { CreateTravelerDto } from "./dto/create-traveler.dto";
 import { UpdateTravelerDto } from "./dto/update-traveler.dto";
 import { JwtAuthGuard } from "../guards/jwt_auth_guard";
 import { AdminGuard } from "../guards/isAdminGuard";
+import { ApiBearerAuth } from "@nestjs/swagger";
 
+@ApiBearerAuth()
 @Controller("travelers")
 export class TravelersController {
   constructor(private readonly travelersService: TravelersService) {}
 
-  @UseGuards(JwtAuthGuard, AdminGuard)
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createTravelerDto: CreateTravelerDto) {
     return this.travelersService.create(createTravelerDto);

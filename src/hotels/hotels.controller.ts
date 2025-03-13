@@ -13,6 +13,9 @@ import { CreateHotelDto } from "./dto/create-hotel.dto";
 import { UpdateHotelDto } from "./dto/update-hotel.dto";
 import { JwtAuthGuard } from "../guards/jwt_auth_guard";
 import { AdminGuard } from "../guards/isAdminGuard";
+import { ApiBearerAuth } from "@nestjs/swagger";
+
+@ApiBearerAuth()
 
 @Controller("hotels")
 export class HotelsController {

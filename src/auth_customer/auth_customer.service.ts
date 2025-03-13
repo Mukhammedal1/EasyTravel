@@ -3,6 +3,7 @@ import {
   ForbiddenException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
@@ -48,9 +49,11 @@ export class AuthCustomerService {
       createCustomerDto.email
     );
     if (customer) {
-      throw new BadRequestException("Bunday foydalanuvchi mavjud");
+      throw new BadRequestException({ message: "Bunday akkaunt mavjud" });
     }
     const newCustomer = await this.customerService.create(createCustomerDto);
+    console.log("customer: ", newCustomer);
+
     const response = {
       message:
         "Tabriklayman tizimga qo'shildingiz. Akkauntni faollashtirish uchun emailga xat yuborildi",
@@ -100,6 +103,9 @@ export class AuthCustomerService {
   }
 
   async signOut(refreshToken: string, res: Response) {
+     if (!refreshToken) {
+       throw new NotFoundException("Refresh token not found");
+     }
     const customerData = await this.jwtService.verify(refreshToken, {
       secret: process.env.CUSTOMER_REFRESH_TOKEN_KEY,
     });
@@ -119,6 +125,9 @@ export class AuthCustomerService {
   }
 
   async refreshToken(customerId: number, refreshToken: string, res: Response) {
+    if (!refreshToken) {
+      throw new NotFoundException("Refresh token not found");
+    }
     const decodedToken = await this.jwtService.decode(refreshToken);
     if (customerId !== decodedToken["id"]) {
       throw new BadRequestException("Ruxsat etilmagan foydalanuvchi");
