@@ -21,7 +21,7 @@ import { ApiBearerAuth } from "@nestjs/swagger";
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
-  // @UseGuards(AdminAuthGuard, AdminCreatorGuard)
+  @UseGuards(JwtAuthGuard, AdminCreatorGuard)
   @Post()
   create(@Body() createAdminDto: CreateAdminDto) {
     return this.adminService.create(createAdminDto);

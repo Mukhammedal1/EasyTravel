@@ -26,13 +26,13 @@ export class CustomersService {
       where: { email },
     });
     if (customer) {
-      throw new BadRequestException("Bunday email egasi mavjud");
+      throw new BadRequestException("Bunday emailli customer mavjud");
     }
     const customer2 = await this.prismaService.customers.findUnique({
       where: { phone: data.phone },
     });
     if (customer2) {
-      throw new BadRequestException("Bunday telefon raqam egasi mavjud");
+      throw new BadRequestException("Bunday telefon raqamli customer mavjud");
     }
 
     const newCustomer = await this.prismaService.customers.create({

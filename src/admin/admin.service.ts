@@ -14,7 +14,13 @@ export class AdminService {
       where: { email },
     });
     if (admin) {
-      throw new BadRequestException("Bunday admin mavjud");
+      throw new BadRequestException("Bunday emailli admin mavjud");
+    }
+    const admin2 = await this.prismaService.admin.findFirst({
+      where: { phone: data.phone },
+    });
+    if (admin2) {
+      throw new BadRequestException("Bunday telefon raqamli admin mavjud");
     }
     const hashed_password = await bcrypt.hash(password, 7);
 

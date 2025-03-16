@@ -15,7 +15,7 @@ async function login() {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/auth-customer/signin",
+        "http://3.77.231.30:3000/auth-customer/signin",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -34,6 +34,9 @@ async function login() {
           icon: "error",
         });
         return;
+      }
+      if (data.accessToken) {
+        localStorage.setItem("access_token", data.accessToken);
       }
 
       login.style.display = "none";
@@ -70,7 +73,7 @@ async function register() {
     try {
       console.log(111111);
       const response = await fetch(
-        "http://localhost:3000/auth-customer/signup",
+        "http://3.77.231.30:3000/auth-customer/signup",
         {
           method: "POST",
           headers: {
@@ -111,7 +114,7 @@ async function register() {
 
 async function refreshToken() {
   try {
-    const response = await fetch("http://localhost:2000/api/admin/refresh", {
+    const response = await fetch("http://3.77.231.30:2000/api/admin/refresh", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -145,7 +148,7 @@ async function logout() {
   document.getElementById("logout-btn").addEventListener("click", logout);
   try {
     const response = await fetch(
-      "http://localhost:3000/auth-customer/signout",
+      "http://3.77.231.30:3000/auth-customer/signout",
       {
         method: "POST",
         credentials: "include",
@@ -181,5 +184,5 @@ async function logout() {
 
 register();
 login();
-logout();
+// logout();
 // refreshToken()

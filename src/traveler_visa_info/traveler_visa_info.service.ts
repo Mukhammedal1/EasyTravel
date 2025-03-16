@@ -53,6 +53,12 @@ export class TravelerVisaInfoService {
     const expiryDateStr = formatted_date.toISOString().split("T")[0];
     const departureDateStr = departureTime.toISOString().split("T")[0];
     console.log(expiryDateStr, departureDateStr);
+    const admin = await this.prismaService.admin.findFirst({
+      where: { is_creator: true },
+    });
+    if (!admin) {
+      throw new BadRequestException("Admin mavjud emas");
+    }
     if (expiryDateStr < departureDateStr) {
       const TO = await this.travelersOrderService.findOneByTO(
         travelersId2,
@@ -78,7 +84,7 @@ export class TravelerVisaInfoService {
     const contarctDto = {
       terms: "Shartlar, qoidalar",
       payment_status: "pending",
-      adminId: 1,
+      adminId: admin.id,
       ordersId: order.id,
     };
     const contract = await this.contractService.create(contarctDto);

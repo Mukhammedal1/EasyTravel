@@ -95,7 +95,7 @@ export class AuthCustomerService {
       httpOnly: true,
     });
     const response = {
-      message: "Login is successfuly",
+      message: "SignIn is successfuly",
       customerId: customer.id,
       access_token: tokens.access_token,
     };
@@ -119,7 +119,7 @@ export class AuthCustomerService {
     );
     res.clearCookie("refresh_token");
     const response = {
-      message: "Logout is successfully",
+      message: "SignOut is successfully",
     };
     return response;
   }

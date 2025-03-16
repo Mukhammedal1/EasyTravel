@@ -26,8 +26,12 @@ export class AppController {
   @Get()
   @Render("index")
   async getAllTourPackages() {
-    // const tourPackages = await this.tourPackageService.findAll();
-    return;
+    const tourPackages2 = await this.tourPackageService.findAll();
+    const tourPackages:any=[]
+    tourPackages.push(tourPackages2[0])
+    tourPackages.push(tourPackages2[1])
+    tourPackages.push(tourPackages2[3]);
+    return {tourPackages}
   }
 
   @Get("signin")
@@ -53,9 +57,8 @@ export class AppController {
   async ShowTourPackages() {
     let tourPackages = await this.tourPackageService.findAll();
 
-    // Har bir tour uchun formatlangan sanalarni qo'shish
     tourPackages = tourPackages.map((tour) => ({
-      ...tour, // Eski qiymatlarni saqlash
+      ...tour,
       valid_from2: new Date(tour.valid_from)
         .toISOString()
         .slice(0, 10)
@@ -69,12 +72,10 @@ export class AppController {
             .toISOString()
             .slice(0, 10)
             .replace(/-/g, ".")
-        : "Noma'lum", // Agar departure_time yo'q bo'lsa
+        : "Noma'lum",
     }));
 
-    console.log(tourPackages); // Natijani tekshirish
-
-    return { tourPackages }; // Endi valid_from2 va valid_to2 tourPackages ichida
+    return { tourPackages };
   }
 
   @Get("travelerform/:id")
@@ -101,7 +102,6 @@ export class AppController {
       return res.redirect("/api/signup");
     }
     const tourPackage = await this.tourPackageService.findOne(+id);
-    console.log(customerId, tourPackage?.id);
     const order = await this.orderService.create({
       tourPackageId: Number(tourPackage?.id),
       customersId: customerId,
@@ -132,7 +132,6 @@ export class AppController {
   async Contract(@Param("id") id: string) {
     const id2 = Number(id);
     const contract = await this.contractService.findOne(id2);
-    console.log(contract?.Orders?.travelers[0]);
     return { contract };
   }
 }

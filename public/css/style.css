@@ -25932,7 +25932,7 @@ img.mfp-img {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url("/images/3.webp");
+  background-image: url("/images/sohil.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -25944,7 +25944,7 @@ img.mfp-img {
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  width: 350px;
+  width: 360px;
   text-align: center;
 }
 
@@ -25956,6 +25956,7 @@ img.mfp-img {
 .input-group {
   margin-bottom: 15px;
   text-align: left;
+  width: 340px;
 }
 
 .input-group label {
@@ -26019,3 +26020,23 @@ img.mfp-img {
   background: linear-gradient(45deg, #0072ff, #00c6ff);
   box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
 }
+
+#profile-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, #00c2ff, #0050ff);
+    border-radius: 50%;
+    /* text-align: center; */
+  }
+
+  /* #profile-link i {
+    font-size: 20px;
+    color: black;
+  }
+
+  #profile-link:hover {
+    background-color: #bbb;
+  } */

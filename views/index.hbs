@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
   </head>
   <body>
@@ -46,7 +47,7 @@
                   <ul class="rd-navbar-corporate-contacts">
                     <li>
                       <div class="unit unit-spacing-xs">
-                        {{!-- <div class="unit-left"><span class="icon fa fa-clock-o"></span></div> --}}
+                        <div class="unit-left"><span class="icon fa fa-clock-o"></span></div>
                         <div class="unit-body">
                           <p>09:00<span>am</span> — 05:00<span>pm</span></p>
                         </div>
@@ -55,11 +56,12 @@
                     <li>
                       <div class="unit unit-spacing-xs">
                         <div class="unit-left"><span class="icon fa fa-phone"></span></div>
-                        <div class="unit-body"><a class="link-phone" href="tel:#">+998 90 123 45 67</a></div>
+                        <div class="unit-body"><a class="link-phone" href="tel:#">📞 +998 90 123 45 67</a></div>
                       </div>
-                    </li>
-                    <a style="margin-left: 15px;" href="/api/signin" class="btn-signin">Sign In</a>
-                    <a style="margin-left: 15px;" href="#" class="btn-signin" id="logout-btn">Sign Out</a>
+                    </li>                    
+
+                    
+                    
                   {{!-- </ul><a class="button button-md button-default-outline-2 button-ujarak" href="#">Get a Free Quote</a> --}}
                 </div>
               </div>
@@ -72,16 +74,19 @@
                     <li><a class="icon fa fa-twitter" href="#"></a></li>
                     <li><a class="icon fa fa-google-plus" href="#"></a></li>
                     <li><a class="icon fa fa-instagram" href="#"></a></li>
+                    
+                    <a style="margin-left: 40px; width: 100px; padding:20px 15px;" href="/api/signin" class="btn-signin">Kirish</a>
+                    
                   </ul>
                   <!-- RD Navbar Nav-->
                   <ul class="rd-navbar-nav">
-                    <li class="rd-nav-item active"><a class="rd-nav-link" href="/api">Home</a>
+                    <li class="rd-nav-item active"><a class="rd-nav-link" href="/api">Bosh sahifa</a>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="/api/about">About</a>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="/api/about">Biz haqimizda</a>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="/api/tourpackages">Tour Packages</a>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="/api/tourpackages">Turpaketlar</a>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="/api/contact">Contact Us</a>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="/api/contact">Aloqa</a>
                     </li>
                   </ul>
                 </div>
@@ -93,37 +98,37 @@
       <!-- Swiper-->
       <section class="section swiper-container swiper-slider swiper-slider-corporate swiper-pagination-style-2" data-loop="true" data-autoplay="5000" data-simulate-touch="true" data-nav="false" data-direction="vertical">
         <div class="swiper-wrapper text-left">
-          <div class="swiper-slide context-dark" data-slide-bg="/images/1.webp">
+          <div class="swiper-slide context-dark" data-slide-bg="/images/dubay2.jpg">
             <div class="swiper-slide-caption section-md">
               <div class="container">
                 <div class="row">
                   <div class="col-md-10">
-                    <h6 class="text-uppercase" data-caption-animate="fadeInRight" data-caption-delay="0">Sohil bo'yida dam oling</h6>
-                    <h2 class="oh font-weight-light" data-caption-animate="slideInUp" data-caption-delay="100"><span>Antaliyaga</span><span class="font-weight-bold"> Sayohat qiling</span></h2><a class="button button-default-outline button-ujarak" href="#" data-caption-animate="fadeInLeft" data-caption-delay="0">View</a>
+                    <h6 class="text-uppercase" data-caption-animate="fadeInRight" data-caption-delay="0">dam olishni dubayda o'tkazing</h6>
+                    <h2 class="oh font-weight-light" data-caption-animate="slideInUp" data-caption-delay="100"><span>Dubayga</span><span class="font-weight-bold">sayohat qiling</span></h2><a class="button button-default-outline button-ujarak" href="/api/tourpackages" data-caption-animate="fadeInLeft" data-caption-delay="0">ko'rish</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="swiper-slide context-dark" data-slide-bg="images/2.webp">
+          <div class="swiper-slide context-dark" data-slide-bg="images/p.jpg">
             <div class="swiper-slide-caption section-md">
               <div class="container">
                 <div class="row">
                   <div class="col-md-10">
-                    <h6 class="text-uppercase" data-caption-animate="fadeInRight" data-caption-delay="0">Ramazon oyi uchun makka shahriga sayohat</h6>
-                    <h2 class="oh font-weight-light" data-caption-animate="slideInUp" data-caption-delay="100"><span>Ramazonda</span><span class="font-weight-bold"> Makkaga sayohat</span></h2><a class="button button-default-outline button-ujarak" href="#" data-caption-animate="fadeInLeft" data-caption-delay="0">View</a>
+                    <h6 class="text-uppercase" data-caption-animate="fadeInRight" data-caption-delay="0">Angliyaga sayohat</h6>
+                    <h2 class="oh font-weight-light" data-caption-animate="slideInUp" data-caption-delay="100"><span></span><span class="font-weight-bold">Parijga sayohat qiling</span></h2><a class="button button-default-outline button-ujarak" href="/api/tourpackages" data-caption-animate="fadeInLeft" data-caption-delay="0">ko'rish</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="swiper-slide context-dark" data-slide-bg="images/3.webp">
+          <div class="swiper-slide context-dark" data-slide-bg="images/ant.jpg">
             <div class="swiper-slide-caption section-md">
               <div class="container">
                 <div class="row">
                   <div class="col-md-10">
-                    <h6 class="text-uppercase" data-caption-animate="fadeInRight" data-caption-delay="0">Build your Next Holiday Trip with Us</h6>
-                    <h2 class="oh font-weight-light" data-caption-animate="slideInUp" data-caption-delay="100"><span>Create</span><span class="font-weight-bold"> Your Tour</span></h2><a class="button button-default-outline button-ujarak" href="#" data-caption-animate="fadeInLeft" data-caption-delay="0">Get in touch</a>
+                    <h6 class="text-uppercase" data-caption-animate="fadeInRight" data-caption-delay="0">Antaliyaga sayohat</h6>
+                    <h2 class="oh font-weight-light" data-caption-animate="slideInUp" data-caption-delay="100"><span>Sohil bo'yida dam oling</span></h2><a class="button button-default-outline button-ujarak" href="/api/tourpackages" data-caption-animate="fadeInLeft" data-caption-delay="0">ko'rish</a>
                   </div>
                 </div>
               </div>
@@ -141,29 +146,95 @@
               <div class="row justify-content-center">
                 <div class="col-md-4 wow fadeInDown col-9" data-wow-delay=".2s">
                   <ul class="list-marked-2 box-categories-list">
-                    <li><a href="#"><img src="images/cta-1-368x420.jpg" alt="" width="368" height="420"/></a>
-                      <h5 class="box-categories-title">Balloon Flights</h5>
+                    <li><a href="/api/tourpackages"><img style="height: 420px;" src="/images/gr.jpg" alt="" width="368" height="420"/></a>
+                      <h5 class="box-categories-title">Gruziyaga sayohat</h5>
                     </li>
                   </ul>
                 </div>
                 <div class="col-md-4 wow fadeInDown col-9" data-wow-delay=".2s">
                   <ul class="list-marked-2 box-categories-list">
-                    <li><a href="#"><img src="images/cta-2-368x420.jpg" alt="" width="368" height="420"/></a>
-                      <h5 class="box-categories-title">Mountain Holiday</h5>
+                    <li><a href="/api/tourpackages"><img style="height: 420px; width: 450px;" src="/images/turkiya.jpg" alt="" width="368" height="420px"/></a>
+                      <h5 class="box-categories-title">Turkiyaga sayohat</h5>
                     </li>
                   </ul>
                 </div>
                 <div class="col-md-4 wow fadeInDown col-9" data-wow-delay=".2s">
                   <ul class="list-marked-2 box-categories-list">
-                    <li><a href="#"><img src="images/cta-3-368x420.jpg" alt="" width="368" height="420"/></a>
-                      <h5 class="box-categories-title">Beach Holidays</h5>
+                    <li><a href="#"><img style=" height: 420px;" src="/images/misr.jpg" alt="" width="368" height="420"/></a>
+                      <h5 class="box-categories-title">Misrga sayohat</h5>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
-          </div><a class="link-classic wow fadeInUp" href="#">Other Tours<span></span></a>
+          </div><a class="link-classic wow fadeInUp" href="/api/tourpackages">Other Tours<span></span></a>
           <!-- Owl Carousel-->
+        </div>
+      </section>
+
+      <section class="section section-sm bg-default">
+        <div class="container">
+          <h3 class="oh-desktop"><span
+              class="d-inline-block wow slideInDown"
+            >Turpaketlar</span></h3>
+          <div class="row row-sm row-40 row-md-50">
+            {{#each tourPackages}}
+
+              <div class="col-sm-6 col-md-12 wow fadeInRight">
+                <!-- Product Big-->
+                <article class="product-big">
+                  <div
+                    class="unit flex-column flex-md-row align-items-md-stretch"
+                  >
+                    <div class="unit-left"><a
+                        class="product-big-figure"
+                        href="#"
+                      ><img
+                          src="/images/{{this.image}}"
+                          alt="image"
+                          width="600"
+                          height="366"
+                        /></a></div>
+                    <div class="unit-body">
+                      <div class="product-big-body">
+                        <h5 class="product-big-title"><h5
+                          >{{this.title}}</h5></h5>
+                        <div
+                          class="group-sm group-middle justify-content-start"
+                        >
+                          <div class="product-big-rating"><span
+                              class="icon material-icons-star"
+                            ></span><span
+                              class="icon material-icons-star"
+                            ></span><span
+                              class="icon material-icons-star"
+                            ></span><span
+                              class="icon material-icons-star"
+                            ></span><span
+                              class="icon material-icons-star_half"
+                            ></span></div><a
+                            class="product-big-reviews"
+                            href="#"
+                          > customer's reviews</a>
+                        </div>
+                        <p class="product-big-text">{{this.description}}</p>
+                        <p class="product-big-text">Amal qilish muddati: {{valid_from2}} - {{valid_to2}}</p>
+                        <p class="product-big-text">Ketish sanasi: {{departure_time2}}</p>
+                        
+                        <a href="/api/package/{{this.id}}" class="button">Buy TourPackage</a>
+
+                        <div class="product-big-price-wrap"><span
+                            class="product-big-price"
+                          >${{this.price}}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+            {{/each}}
+          
+          </div>
         </div>
       </section>
       <!-- Discover New Horizons-->
@@ -205,7 +276,7 @@
         </div>
       </section> --}}
       <!--	Our Services-->
-      <section class="section section-sm">
+      {{!-- <section class="section section-sm">
         <div class="container">
           <h3>Our Services</h3>
           <div class="row row-30">
@@ -289,11 +360,11 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> --}}
       <!-- Hot tours-->
-      <section class="section section-sm bg-default">
+      {{!-- <section class="section section-sm bg-default">
         <div class="container">
-          <h3 class="oh-desktop"><span class="d-inline-block wow slideInDown">Hot Tours</span></h3>
+          <h3 class="oh-desktop"><span class="d-inline-block wow slideInDown">Turpaketlar</span></h3>
           <div class="row row-sm row-40 row-md-50">
             <div class="col-sm-6 col-md-12 wow fadeInRight">
               <!-- Product Big-->
@@ -409,9 +480,9 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> --}}
       <!-- Section Subscribe-->
-      <section class="section bg-default text-center offset-top-50">
+      {{!-- <section class="section bg-default text-center offset-top-50">
         <div class="parallax-container" data-parallax-img="images/parallax-1-1920x850.jpg">
           <div class="parallax-content section-xl section-inset-custom-1 context-dark bg-overlay-2-21">
             <div class="container">
@@ -420,7 +491,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> --}}
       <!--	Instagrram wondertour-->
       <section class="section section-sm section-top-0 section-fluid section-relative bg-gray-4">
         <div class="container-fluid">
@@ -469,13 +540,7 @@
               <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="images/gallery-image-6-1200x800-original.jpg" data-lightgallery="item"><img src="images/gallery-image-6-270x195.jpg" alt="" width="270" height="195"/></a>
               </div>
             </article>
-            <!-- Thumbnail Classic-->
-            {{!-- <article class="thumbnail thumbnail-mary">
-              <div class="thumbnail-mary-figure"><img src="images/gallery-image-7-270x195.jpg" alt="" width="270" height="195"/>
-              </div>
-              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="images/gallery-image-7-1200x800-original.jpg" data-lightgallery="item"><img src="images/gallery-image-7-270x195.jpg" alt="" width="270" height="195"/></a>
-              </div>
-            </article> --}}
+           
           </div>
         </div>
       </section>
@@ -578,41 +643,8 @@
     <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>
     <!-- Javascript-->
-    <script>
-  document.getElementById("logout-btn").addEventListener("click", async function () {
-    try {
-      const response = await fetch("http://localhost:3000/auth-customer/signout", {
-        method: "POST",
-        credentials: "include",
-      });
-
-      const data = await response.json(); // Javobni JSON formatda olish
-
-      if (response.ok) {
-        Swal.fire({
-          title: "",
-          text: data.message,
-          icon: "success",
-        }).then(() => {
-          window.location.href = "/api";
-        });
-      } else {
-        Swal.fire({
-          title: "",
-          text: data.message || "Logout failed",
-          icon: "error",
-        });
-      }
-    } catch (error) {
-      console.error("Logout error:", error);
-      Swal.fire({
-        title: "Error",
-        text: "An error occurred while logging out. Please try again.",
-        icon: "error",
-      });
-    }
-  });
-</script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/core.min.js"></script>
     <script src="/js/script.js"></script>
   </body>

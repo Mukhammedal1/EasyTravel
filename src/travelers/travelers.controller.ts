@@ -20,7 +20,7 @@ import { ApiBearerAuth } from "@nestjs/swagger";
 export class TravelersController {
   constructor(private readonly travelersService: TravelersService) {}
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createTravelerDto: CreateTravelerDto) {
     return this.travelersService.create(createTravelerDto);
